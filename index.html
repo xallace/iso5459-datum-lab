@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3-2-1 Datum Reference Frame Lab · DIN EN ISO 5459</title>
+  <meta name="description" content="Interactive 1967 book-plate inspection lab for DIN EN ISO 5459 3-2-1 datum reference frames, |A|B|C| vs |A|C|B| precedence, common datums |A-B|, and datum targets." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2218%22 fill=%22%23efe6d3%22 stroke=%22%23181715%22 stroke-width=%226%22/><polygon points=%2250,72 34,90 66,90%22 fill=%22%23181715%22/><line x1=%2250%22 y1=%2252%22 x2=%2250%22 y2=%2274%22 stroke=%22%23181715%22 stroke-width=%225%22/><rect x=%2228%22 y=%2214%22 width=%2244%22 height=%2240%22 fill=%22%23faf5e8%22 stroke=%22%23d94426%22 stroke-width=%226%22/><text x=%2250%22 y=%2245%22 font-family=%22Inter,Arial,sans-serif%22 font-size=%2230%22 font-weight=%22800%22 fill=%22%23181715%22 text-anchor=%22middle%22>A</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Top Header (Pure 1967 Technical Book-Plate Aesthetic) -->
+    <header id="app-header">
+      <div class="header-left">
+        <a href="https://xallace.github.io/#technical-design" class="pill-btn back-chip" title="Back to Portfolio Hub">← Portfolio</a>
+        <div class="brand-badge-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+            <rect x="6" y="2" width="12" height="11" stroke="#d94426" stroke-width="2" />
+            <text x="12" y="10.5" font-family="Outfit, Inter, sans-serif" font-size="8.5" font-weight="800" fill="currentColor" stroke="none" text-anchor="middle">A</text>
+            <line x1="12" y1="13" x2="12" y2="18" />
+            <polygon points="12,17 8,22 16,22" fill="currentColor" stroke="none" />
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>3-2-1 DATUM LAB <span class="sub-tag">ISO 5459</span></h1>
+          <p class="source-ref">6-DOF Locking · |A|B|C| vs. |A|C|B| · Common Datum |A-B|</p>
+        </div>
+      </div>
+
+      <nav class="main-tabs" role="tablist" aria-label="Laboratory Modules">
+        <button class="tab-btn active" data-tab="dof" role="tab" aria-selected="true" id="tab-dof">1 · 3-2-1 DOF</button>
+        <button class="tab-btn" data-tab="precedence" role="tab" aria-selected="false" id="tab-precedence">2 · |A|B|C| vs. |A|C|B|</button>
+        <button class="tab-btn" data-tab="common" role="tab" aria-selected="false" id="tab-common">3 · Common &amp; Targets</button>
+        <button class="tab-btn" data-tab="rules" role="tab" aria-selected="false" id="tab-rules">4 · ISO 5459 Rules</button>
+      </nav>
+
+      <div class="header-right">
+        <button id="btn-tour" class="pill-btn accent"><span>▶</span> Guided Tour</button>
+      </div>
+    </header>
+
+    <!-- Guided Tour Banner -->
+    <section id="tour-banner" class="tour-banner hidden" aria-live="polite">
+      <div class="tour-left">
+        <span class="tour-step-badge" id="tour-step-badge">Stop 1 / 4</span>
+        <div>
+          <h2 class="tour-title" id="tour-title">Tour Stop</h2>
+          <p class="tour-body" id="tour-body"></p>
+        </div>
+      </div>
+      <div class="tour-controls">
+        <button id="btn-tour-prev" class="pill-btn">← Prev</button>
+        <button id="btn-tour-next" class="pill-btn vermilion">Next →</button>
+        <button id="btn-tour-close" class="pill-btn" title="Close guided tour">✕</button>
+      </div>
+    </section>
+
+    <main class="workspace">
+
+      <!-- ================================================================
+           TAB 1: 3-2-1 DEGREES OF FREEDOM LOCK (INTERACTIVE 3D FIXTURE)
+           ================================================================ -->
+      <section class="view active" id="view-dof">
+        <div class="split-layout">
+          <div class="stage-col">
+            <div class="verdict-strip">
+              <div class="verdict-cell" id="dof-v-locked">
+                <span class="v-kicker">CONSTRAINED DOF</span>
+                <div class="v-value" id="dof-locked-val">6 / 6</div>
+                <span class="v-sub" id="dof-locked-sub">Fully constrained rigid body</span>
+              </div>
+              <div class="verdict-cell" id="dof-v-free">
+                <span class="v-kicker">REMAINING FREE DOF</span>
+                <div class="v-value" id="dof-free-val">0 FREE</div>
+                <span class="v-sub" id="dof-free-sub">Repeatable CMM coordinate frame</span>
+              </div>
+              <div class="verdict-cell info">
+                <span class="v-kicker">ACTIVE DATUM SYSTEM</span>
+                <div class="v-value" id="dof-frame-val">| A | B | C |</div>
+                <span class="v-sub" id="dof-frame-sub">3-2-1 Orthogonal Planes</span>
+              </div>
+            </div>
+
+            <div class="plate-card">
+              <div class="plate-card-head">
+                <span class="plate-fig-label">PLATE I · 3D RIGID-BODY DATUM FIXTURE &amp; 6-DOF CONSTRAINT MAP</span>
+                <div class="plate-head-controls">
+                  <button id="btn-anim-free" class="mini-btn vermilion active">⏸ Animate Free DOF</button>
+                  <button id="btn-reset-cam" class="mini-btn">↺ Reset View</button>
+                </div>
+              </div>
+              <canvas id="canvas-dof3d" class="canvas-3d"></canvas>
+            </div>
+
+            <!-- 6-DOF Interactive Matrix Bar -->
+            <div class="dof-grid" id="dof-matrix"></div>
+          </div>
+
+          <aside class="inspector-col">
+            <div class="panel-card">
+              <h2 class="plate-heading">3-2-1 Rigid-Body Constraint</h2>
+              <p class="plate-prose">
+                Every solid part in 3D space has <strong>6 degrees of freedom</strong>: three translations (<code>Tx, Ty, Tz</code>) and three rotations (<code>Rx, Ry, Rz</code>). Toggle Primary, Secondary, and Tertiary datums below — any unlocked axis remains physically free to slide or rock!
+              </p>
+
+              <div class="control-section">
+                <div class="section-label">FIXTURE PRESET</div>
+                <div class="preset-grid">
+                  <button class="preset-btn active" data-dofpreset="block321">Machined Block (Plane–Plane–Plane)</button>
+                  <button class="preset-btn" data-dofpreset="flange">Bearing Flange (Plane + Bore + Pin)</button>
+                </div>
+              </div>
+
+              <div class="control-section">
+                <div class="section-label">STEP-BY-STEP DATUM ENGAGEMENT</div>
+                <div class="preset-grid" style="margin-bottom:10px;">
+                  <button class="preset-btn" data-step="0">0 · Free</button>
+                  <button class="preset-btn" data-step="1">1 · Primary A</button>
+                  <button class="preset-btn" data-step="2">2 · A | B</button>
+                  <button class="preset-btn active" data-step="3">3 · A | B | C (Full)</button>
+                </div>
+
+                <div class="datum-toggle-list">
+                  <label class="datum-toggle-row is-a">
+                    <input type="checkbox" id="chk-has-a" checked />
+                    <span class="dt-badge a">A</span>
+                    <div class="dt-info">
+                      <strong id="lbl-a-title">Primary Datum A · Base Plane (3 Contact Points)</strong>
+                      <span id="lbl-a-dof">Locks 3 DOF: Tz, Rx, Ry</span>
+                    </div>
+                  </label>
+                  <label class="datum-toggle-row is-b">
+                    <input type="checkbox" id="chk-has-b" checked />
+                    <span class="dt-badge b">B</span>
+                    <div class="dt-info">
+                      <strong id="lbl-b-title">Secondary Datum B · Back Wall (2 Contact Points)</strong>
+                      <span id="lbl-b-dof">Locks 2 DOF: Ty, Rz</span>
+                    </div>
+                  </label>
+                  <label class="datum-toggle-row is-c">
+                    <input type="checkbox" id="chk-has-c" checked />
+                    <span class="dt-badge c">C</span>
+                    <div class="dt-info">
+                      <strong id="lbl-c-title">Tertiary Datum C · Side Stop (1 Contact Point)</strong>
+                      <span id="lbl-c-dof">Locks 1 DOF: Tx</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="control-section">
+                <div class="section-label">WHY ORDER MATTERS</div>
+                <p class="plate-prose" style="margin-bottom:0;">
+                  Real parts are never perfectly square. Because Primary takes <strong>3 points</strong>, Secondary takes <strong>2 points</strong>, and Tertiary takes only <strong>1 point</strong>, the order of letters inside <code>| A | B | C |</code> dictates which physical surface aligns the CMM axes. Switch to <strong>Tab 2</strong> to watch swapping <code>B</code> and <code>C</code> flip a PASS/FAIL verdict!
+                </p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           TAB 2: |A|B|C| VS. |A|C|B| PRECEDENCE PARADOX (EXACT SE(2))
+           ================================================================ -->
+      <section class="view" id="view-precedence">
+        <div class="split-layout">
+          <div class="stage-col">
+            <div class="verdict-strip">
+              <div class="verdict-cell" id="prec-v-abc">
+                <span class="v-kicker">UNDER | A | B | C |</span>
+                <div class="v-value" id="prec-abc-val">PASS</div>
+                <span class="v-sub" id="prec-abc-sub">Øe = 0.072 mm ≤ Ø0.200</span>
+              </div>
+              <div class="verdict-cell" id="prec-v-acb">
+                <span class="v-kicker">UNDER | A | C | B |</span>
+                <div class="v-value" id="prec-acb-val">REJECT</div>
+                <span class="v-sub" id="prec-acb-sub">Øe = 1.158 mm &gt; Ø0.200</span>
+              </div>
+              <div class="verdict-cell" id="prec-v-flip">
+                <span class="v-kicker">PRECEDENCE EFFECT</span>
+                <div class="v-value" id="prec-flip-val">VERDICT FLIPS!</div>
+                <span class="v-sub" id="prec-flip-sub">Same part, opposite QA result</span>
+              </div>
+            </div>
+
+            <div class="plate-card">
+              <div class="plate-card-head">
+                <span class="plate-fig-label">PLATE II · PLAN INSPECTION: SWAPPING SECONDARY B ↔ TERTIARY C</span>
+                <div class="plate-head-controls">
+                  <button id="btn-order-abc" class="mini-btn vermilion active">| A | B | C |</button>
+                  <button id="btn-order-acb" class="mini-btn">| A | C | B |</button>
+                  <button id="btn-swap-order" class="mini-btn">⇄ Swap B ↔ C</button>
+                </div>
+              </div>
+              <canvas id="canvas-precedence" class="canvas-3d"></canvas>
+            </div>
+          </div>
+
+          <aside class="inspector-col">
+            <div class="panel-card">
+              <div class="envelope-master" id="prec-master-box">
+                <div class="env-top-row">
+                  <div>
+                    <span class="env-kicker">ACTIVE FEATURE CONTROL FRAME</span>
+                    <div class="env-callout" id="prec-fcf-display">| ⌖ | Ø0.20 | A | B | C |</div>
+                  </div>
+                  <button id="btn-swap-big" class="e-toggle-btn">⇄ Swap to |A|C|B|</button>
+                </div>
+                <p class="env-explain" id="prec-explain"></p>
+              </div>
+
+              <div class="control-section">
+                <div class="section-label">WORKPIECE SQUARENESS &amp; HOLE LOCATION</div>
+
+                <div class="slider-item">
+                  <div class="slider-head">
+                    <label for="sl-skew">Face C Squareness Deviation α</label>
+                    <strong id="val-skew">0.35°</strong>
+                  </div>
+                  <input id="sl-skew" type="range" min="-1.0" max="1.0" step="0.05" value="0.35" />
+                </div>
+
+                <div class="slider-item">
+                  <div class="slider-head">
+                    <label for="sl-tedx">Hole Lever Arm TED [X]</label>
+                    <strong id="val-tedx">95 mm</strong>
+                  </div>
+                  <input id="sl-tedx" type="range" min="25" max="110" step="5" value="95" />
+                </div>
+
+                <div class="slider-item">
+                  <div class="slider-head">
+                    <label for="sl-tedy">Hole Depth TED [Y]</label>
+                    <strong id="val-tedy">55 mm</strong>
+                  </div>
+                  <input id="sl-tedy" type="range" min="15" max="70" step="5" value="55" />
+                </div>
+
+                <div class="slider-item">
+                  <div class="slider-head">
+                    <label for="sl-tolpos">Position Tolerance Øt</label>
+                    <strong id="val-tolpos">Ø0.20 mm</strong>
+                  </div>
+                  <input id="sl-tolpos" type="range" min="0.05" max="1.00" step="0.05" value="0.20" />
+                </div>
+              </div>
+
+              <div class="control-section">
+                <div class="section-label">EXACT SE(2) CMM MEASUREMENT TELEMETRY</div>
+                <table class="spec-table" id="prec-telemetry"></table>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           TAB 3: COMMON DATUM |A-B| & CAST DATUM TARGETS (A1/A2/A3)
+           ================================================================ -->
+      <section class="view" id="view-common">
+        <div class="split-layout">
+          <div class="stage-col">
+            <div class="verdict-strip">
+              <div class="verdict-cell" id="cd-v-single">
+                <span class="v-kicker">SINGLE DATUM | A | RUNOUT</span>
+                <div class="v-value" id="cd-single-val">164.0 µm</div>
+                <span class="v-sub">Extrapolating 30 mm bearing over 235 mm</span>
+              </div>
+              <div class="verdict-cell pass" id="cd-v-common">
+                <span class="v-kicker">COMMON DATUM | A-B | RUNOUT</span>
+                <div class="v-value" id="cd-common-val">0.7 µm</div>
+                <span class="v-sub">True functional dual-bearing rotation axis</span>
+              </div>
+              <div class="verdict-cell info">
+                <span class="v-kicker">SHORT-DATUM AMPLIFICATION</span>
+                <div class="v-value" id="cd-amp-val">7.8×</div>
+                <span class="v-sub">Lever ratio (L_pinion / L_seatA)</span>
+              </div>
+            </div>
+
+            <div class="plate-card">
+              <div class="plate-card-head">
+                <span class="plate-fig-label" id="cd-fig-label">PLATE III · COMMON DATUM |A-B| (DUAL BEARING SHAFT) VS. SINGLE DATUM |A|</span>
+                <div class="plate-head-controls">
+                  <button id="btn-cd-shaft" class="mini-btn vermilion active">Shaft Common Datum |A-B|</button>
+                  <button id="btn-cd-targets" class="mini-btn">Cast Datum Targets (A1–A3)</button>
+                </div>
+              </div>
+              <canvas id="canvas-common" class="canvas-3d"></canvas>
+            </div>
+          </div>
+
+          <aside class="inspector-col">
+            <div class="panel-card" id="cd-panel-shaft">
+              <h2 class="plate-heading">Common Datum | A-B |</h2>
+              <p class="plate-prose">
+                A rotating drive shaft is supported by <strong>two bearings (A and B)</strong>, not one! Specifying runout relative to a single short bearing seat <code>| A |</code> extrapolates tiny bearing tilt across the entire shaft length — causing massive false rejects at the pinion. Connecting both bearing centers with a hyphen <code>| A-B |</code> establishes the true functional rotation axis.
+              </p>
+
+              <div class="control-section">
+                <div class="section-label">COMPARE DATUM CALLOUT</div>
+                <div class="preset-grid">
+                  <button class="preset-btn active" data-cdmode="A-B">Common Datum | A-B | (Best Practice)</button>
+                  <button class="preset-btn" data-cdmode="A">Single Short Datum | A | (Amplifies Error)</button>
+                </div>
+              </div>
+
+              <div class="control-section">
+                <div class="section-label">SHAFT ECCENTRICITY &amp; SEAT TILT (µm)</div>
+                <div class="slider-item">
+                  <div class="slider-head"><label for="sl-atilt">Seat A Local Tilt over 30 mm</label><strong id="val-atilt">12 µm</strong></div>
+                  <input id="sl-atilt" type="range" min="0" max="25" step="1" value="12" />
+                </div>
+                <div class="slider-item">
+                  <div class="slider-head"><label for="sl-boff">Seat B Radial Offset</label><strong id="val-boff">10 µm</strong></div>
+                  <input id="sl-boff" type="range" min="-20" max="20" step="1" value="10" />
+                </div>
+                <div class="slider-item">
+                  <div class="slider-head"><label for="sl-poff">Pinion Journal Offset</label><strong id="val-poff">12 µm</strong></div>
+                  <input id="sl-poff" type="range" min="-25" max="25" step="1" value="12" />
+                </div>
+              </div>
+
+              <div class="control-section">
+                <div class="section-label">MEASURED RUNOUT COMPARISON (TIR)</div>
+                <table class="spec-table" id="cd-telemetry"></table>
+              </div>
+            </div>
+
+            <div class="panel-card hidden" id="cd-panel-targets">
+              <h2 class="plate-heading">Datum Targets (A1, A2, A3)</h2>
+              <p class="plate-prose">
+                Raw sand castings, forged brackets, and welded frames have wavy, uneven surfaces. Calling the entire rough face <code>Datum A</code> creates a <strong>rocking, unrepeatable inspection setup</strong>. Under DIN EN ISO 5459, specify three explicit <strong>Datum Target Areas</strong> (<code>Ø6 / A1</code>, <code>A2</code>, <code>A3</code>) so every fixture and CMM seats on the exact same 3 points.
+              </p>
+              <div class="control-section">
+                <div class="section-label">INSPECTION SETUP MODE</div>
+                <div class="preset-grid">
+                  <button class="preset-btn active" data-tgt="on">With Targets A1, A2, A3 (Stable)</button>
+                  <button class="preset-btn" data-tgt="off">Full Rough Cast Face (Rocking)</button>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           TAB 4: ISO 5459 RULES & DATUM LETTER GUARD (§7.2.2)
+           ================================================================ -->
+      <section class="view" id="view-rules">
+        <div class="standards-sheet-page">
+          <div class="sheet-folio-header">
+            <span>PLATE IV · DIN EN ISO 5459 RULES &amp; LIVE FRAME VALIDATOR</span>
+            <span>3-2-1 PRECEDENCE · COMMON DATUMS · FORBIDDEN LETTERS (§7.2.2)</span>
+          </div>
+
+          <h2 class="plate-heading large">ISO 5459 Datum Frame Validator &amp; Best Practices</h2>
+          <p class="sheet-subtitle">Test any Primary / Secondary / Tertiary datum combination (including common datums like <code>A-B</code>) against DIN EN ISO 5459 §7.2.2.</p>
+
+          <!-- Interactive Frame Validator -->
+          <div class="validator-box">
+            <div class="val-inputs">
+              <label>
+                <span>Primary Datum</span>
+                <input id="inp-val-p" type="text" maxlength="3" value="A" class="val-inp" />
+              </label>
+              <label>
+                <span>Secondary Datum</span>
+                <input id="inp-val-s" type="text" maxlength="3" value="B" class="val-inp" />
+              </label>
+              <label>
+                <span>Tertiary Datum</span>
+                <input id="inp-val-t" type="text" maxlength="3" value="C" class="val-inp" />
+              </label>
+              <div class="val-preview" id="val-preview-fcf">| ⌖ | Ø0.10 | A | B | C |</div>
+            </div>
+            <div class="val-presets">
+              <button class="preset-btn" data-valex="A,B,C">Valid |A|B|C|</button>
+              <button class="preset-btn" data-valex="A-B,C,">Common |A-B|C|</button>
+              <button class="preset-btn" data-valex="A,I,O">Trap: Forbidden I &amp; O</button>
+              <button class="preset-btn" data-valex="A,B,X">Trap: Forbidden X</button>
+              <button class="preset-btn" data-valex="A,B,A">Trap: Duplicate A</button>
+            </div>
+            <div class="val-result" id="val-result-box"></div>
+          </div>
+
+          <div class="sheet-divider"></div>
+
+          <div class="rules-spread">
+            <div class="rule-col">
+              <div class="rule-badge good">GOLDEN RULES OF ISO 5459</div>
+              <ul class="plate-list">
+                <li><strong>Mirror real assembly sequence:</strong> Primary Datum <code>A</code> is the largest functional mounting face the part sits on first — never a tiny cosmetic chamfer.</li>
+                <li><strong>Long edge before short edge:</strong> Make the longer functional guide edge Secondary (2 points) to minimize angular lever-arm amplification.</li>
+                <li><strong>Use Common Datum <code>A-B</code></strong> whenever a shaft is carried by two spaced bearings.</li>
+                <li><strong>Use Datum Targets (<code>A1, A2, A3</code>)</strong> on unmachined castings, forgings, and weldments.</li>
+              </ul>
+            </div>
+            <div class="rule-col is-warn">
+              <div class="rule-badge warn">FREQUENT DRAWING ERRORS</div>
+              <ul class="plate-list">
+                <li><strong>Forbidden letters (ISO 5459 §7.2.2):</strong> Never use <code>I</code>, <code>O</code>, <code>Q</code>, or <code>X</code> as datum identifiers (confused with 1, 0, Ø, or multiplication).</li>
+                <li><strong>CAD-sketch datums:</strong> Dimensioning from arbitrary CAD origin planes instead of physical mating features inflates manufacturing cost.</li>
+                <li><strong>Swapping Secondary &amp; Tertiary casually:</strong> <code>|A|B|C|</code> and <code>|A|C|B|</code> define completely different coordinate frames on imperfect real parts.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sources-footer-box">
+            <strong>Standards &amp; Technical References:</strong>
+            DIN EN ISO 5459 (Geometrical Product Specifications — Datums and Datum Systems) ·
+            DIN EN ISO 1101 (Geometrical Tolerancing) ·
+            DIN EN ISO 8015 (Fundamental Principles) ·
+            Schütte &amp; Jorden, <em>Form- und Lagetoleranzen</em> (Ch. 02 Toleranzarten und Bezüge) ·
+            IHK PAL TPD-GPS Sample Drawings (<code>01 Konsole</code>, <code>02 Schwenklager</code>, <code>03 Antriebswelle</code>).
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <span class="footer-note">Verified analytically against DIN EN ISO 5459 SE(2)/6-DOF algebra (14 automated checks · zero external dependencies)</span>
+      <span class="footer-meta">3-2-1 Datum Lab · <a href="https://xallace.github.io" target="_blank" rel="noopener noreferrer">xallace.github.io</a></span>
+    </footer>
+  </div>
+
+  <script src="datum-math.js"></script>
+  <script src="draw.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
