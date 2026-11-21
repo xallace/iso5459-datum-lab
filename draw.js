@@ -181,7 +181,7 @@
       ctx.lineWidth = 1.2;
       ctx.stroke();
 
-      ctx.font = '700 9.5px "JetBrains Mono", monospace';
+      ctx.font = '700 9.5px "Iosevka Charon Mono", monospace';
       ctx.fillStyle = color;
       ctx.fillText(label, tip.x + 7, tip.y - 4);
       ctx.restore();
@@ -324,7 +324,7 @@
         ctx.beginPath(); ctx.moveTo(pBot.x, pBot.y); ctx.lineTo(pTop.x, pTop.y); ctx.stroke();
         ctx.setLineDash([]);
         ctx.fillStyle = C.blue;
-        ctx.font = '700 10px "JetBrains Mono", monospace';
+        ctx.font = '700 10px "Iosevka Charon Mono", monospace';
         ctx.fillText('Datum B (Axis: Tx, Ty)', pTop.x + 8, pTop.y + 4);
       }
       if (state.hasC) {
@@ -351,7 +351,7 @@
     drawArrow(ctx, o3.x, o3.y, y3.x, y3.y, C.blue, 5.5);
     drawArrow(ctx, o3.x, o3.y, z3.x, z3.y, C.green, 5.5);
     ctx.save();
-    ctx.font = '700 10px "JetBrains Mono", monospace';
+    ctx.font = '700 10px "Iosevka Charon Mono", monospace';
     ctx.fillStyle = C.amber; ctx.fillText('X', x3.x + 5, x3.y + 3);
     ctx.fillStyle = C.blue;  ctx.fillText('Y', y3.x + 5, y3.y + 3);
     ctx.fillStyle = C.green; ctx.fillText('Z', z3.x - 3, z3.y - 6);
@@ -360,13 +360,13 @@
     // Top-left plate header & hint
     ctx.save();
     const activeFrame = [state.hasA ? 'A' : null, state.hasB ? 'B' : null, state.hasC ? 'C' : null].filter(Boolean);
-    ctx.font = '700 11.5px "JetBrains Mono", monospace';
+    ctx.font = '700 11.5px "Iosevka Charon Mono", monospace';
     ctx.fillStyle = C.ink;
     ctx.fillText(
       `DRF: ${activeFrame.length ? '| ' + activeFrame.join(' | ') + ' |' : '(UNCONSTRAINED)'}  ·  ${dofSol.lockedCount}/6 DOF LOCKED`,
       22, 31
     );
-    ctx.font = '500 9.5px "Inter", sans-serif';
+    ctx.font = '500 9.5px "Iosevka Charon", sans-serif';
     ctx.fillStyle = C.muted;
     ctx.fillText('Drag anywhere to orbit 3D fixture · Press Animate Free DOF to see unlocked motion', 22, h - 18);
     ctx.restore();
@@ -470,7 +470,7 @@
     drawArrow(ctx, scrO.x, scrO.y, scrXEnd.x, scrXEnd.y, C.blue, 6.5);
     drawArrow(ctx, scrO.x, scrO.y, scrYEnd.x, scrYEnd.y, C.blue, 6.5);
     ctx.save();
-    ctx.font = '700 10px "JetBrains Mono", monospace';
+    ctx.font = '700 10px "Iosevka Charon Mono", monospace';
     ctx.fillStyle = C.blue;
     ctx.fillText(`X_${act.order}`, scrXEnd.x + 6, scrXEnd.y + 4);
     ctx.fillText(`Y_${act.order}`, scrYEnd.x - 6, scrYEnd.y - 8);
@@ -487,7 +487,7 @@
       ctx.strokeStyle = C.paper;
       ctx.lineWidth = 1.4;
       ctx.stroke();
-      ctx.font = '700 9.5px "JetBrains Mono", monospace';
+      ctx.font = '700 9.5px "Iosevka Charon Mono", monospace';
       ctx.fillStyle = color;
       ctx.fillText(label, s.x + dx, s.y + dy);
       ctx.restore();
@@ -532,7 +532,7 @@
     ctx.fillRect(zx - 78, zy - 74, 156, 152);
     ctx.strokeRect(zx - 78, zy - 74, 156, 152);
 
-    ctx.font = '700 8.5px "JetBrains Mono", monospace';
+    ctx.font = '700 8.5px "Iosevka Charon Mono", monospace';
     ctx.fillStyle = C.muted;
     ctx.textAlign = 'center';
     ctx.fillText(`POSITION ZONE ZOOM`, zx, zy - 60);
@@ -576,21 +576,21 @@
     ctx.arc(zx + dxPx, zy + dyPx, 4.2, 0, Math.PI * 2);
     ctx.fill();
 
-    ctx.font = '700 9.5px "JetBrains Mono", monospace';
+    ctx.font = '700 9.5px "Iosevka Charon Mono", monospace';
     ctx.fillStyle = act.pass ? C.green : C.red;
     ctx.fillText(`Øe = ${act.posDiaErr.toFixed(3)} mm ${act.pass ? '✓' : '✕'}`, zx, zy + 68);
     ctx.restore();
 
     // Feature Control Frame Callout top-left
     ctx.save();
-    ctx.font = '700 12px "JetBrains Mono", monospace';
+    ctx.font = '700 12px "Iosevka Charon Mono", monospace';
     ctx.fillStyle = C.ink;
     ctx.textAlign = 'left';
     const fcf = act.order === 'ABC'
       ? `| ⌖ | Ø${sol.tolPosMm.toFixed(2)} | A | B | C |`
       : `| ⌖ | Ø${sol.tolPosMm.toFixed(2)} | A | C | B |`;
     ctx.fillText(fcf, 24, 34);
-    ctx.font = '500 10px "Inter", sans-serif';
+    ctx.font = '500 10px "Iosevka Charon", sans-serif';
     ctx.fillStyle = C.muted;
     ctx.fillText(
       `Face C squareness error α = ${sol.skewDeg.toFixed(2)}° (magnified ${visExag}× visually) · TED [${sol.tedX}, ${sol.tedY}] mm`,
@@ -641,13 +641,13 @@
       ctx.fillRect(sx1, cy - halfH, sx2 - sx1, halfH * 2);
       ctx.strokeRect(sx1, cy - halfH, sx2 - sx1, halfH * 2);
       if (label) {
-        ctx.font = '700 10px "JetBrains Mono", monospace';
+        ctx.font = '700 10px "Iosevka Charon Mono", monospace';
         ctx.fillStyle = C.ink;
         ctx.textAlign = 'center';
         ctx.fillText(label, (sx1 + sx2) / 2, cy - halfH - 9);
       }
       if (sub) {
-        ctx.font = '500 9px "Inter", sans-serif';
+        ctx.font = '500 9px "Iosevka Charon", sans-serif';
         ctx.fillStyle = C.muted;
         ctx.textAlign = 'center';
         ctx.fillText(sub, (sx1 + sx2) / 2, cy + halfH + 15);
@@ -681,7 +681,7 @@
       ctx.lineTo(xOf(280), y2);
       ctx.stroke();
       ctx.setLineDash([]);
-      ctx.font = '700 10px "JetBrains Mono", monospace';
+      ctx.font = '700 10px "Iosevka Charon Mono", monospace';
       ctx.fillStyle = color;
       ctx.textAlign = 'right';
       ctx.fillText(tag, xOf(280), y2 + labelOffsetY);
@@ -699,13 +699,13 @@
 
     // Header
     ctx.save();
-    ctx.font = '700 12px "JetBrains Mono", monospace';
+    ctx.font = '700 12px "Iosevka Charon Mono", monospace';
     ctx.fillStyle = C.ink;
     ctx.fillText(
       `ACTIVE DATUM: | ${cdState.datumMode} |  ·  PINION RUNOUT = ${cdSol.active.overhangRunoutUm.toFixed(1)} µm`,
       24, 34
     );
-    ctx.font = '500 10px "Inter", sans-serif';
+    ctx.font = '500 10px "Iosevka Charon", sans-serif';
     ctx.fillStyle = C.muted;
     ctx.fillText(
       `Short-seat amplification over 235 mm overhang = ${cdSol.amplificationFactor.toFixed(1)}× (Datum A alone magnifies seat tilt dramatically)`,
@@ -768,7 +768,7 @@
         ctx.beginPath(); ctx.arc(tx, cy, 16, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(tx - 16, cy); ctx.lineTo(tx + 16, cy); ctx.stroke();
         ctx.fillStyle = C.ink;
-        ctx.font = '700 8.5px "JetBrains Mono", monospace';
+        ctx.font = '700 8.5px "Iosevka Charon Mono", monospace';
         ctx.textAlign = 'center';
         ctx.fillText('Ø6', tx, cy - 4);
         ctx.fillStyle = C.green;
@@ -780,7 +780,7 @@
       drawArrow(ctx, w * 0.2, midY - 135, w * 0.2, midY - 102, C.red, 6);
       drawArrow(ctx, w * 0.8, midY - 102, w * 0.8, midY - 135, C.red, 6);
       ctx.save();
-      ctx.font = '700 11px "Inter", sans-serif';
+      ctx.font = '700 11px "Iosevka Charon", sans-serif';
       ctx.fillStyle = C.red;
       ctx.textAlign = 'center';
       ctx.fillText('UNSTABLE ROCKING — Entire rough cast face called as Datum A!', w * 0.5, midY + 48);
@@ -788,7 +788,7 @@
     }
 
     ctx.save();
-    ctx.font = '700 12px "JetBrains Mono", monospace';
+    ctx.font = '700 12px "Iosevka Charon Mono", monospace';
     ctx.fillStyle = useTargets ? C.green : C.red;
     ctx.fillText(
       useTargets

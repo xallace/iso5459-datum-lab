@@ -27,9 +27,9 @@
   --amber-bg: rgba(237, 134, 75, 0.10);
   --blue-bg: rgba(86, 168, 228, 0.09);
 
-  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-display: 'Outfit', 'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono', Consolas, monospace;
+  --font-ui: var(--xt-text);
+  --font-display: var(--xt-title);
+  --font-mono: var(--xt-mono);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -166,7 +166,7 @@ html, body {
 
 .tour-left { display: flex; align-items: flex-start; gap: 12px; }
 .tour-step-badge {
-  font-family: var(--font-mono);
+  font-family: var(--xt-small);
   font-size: 0.7rem;
   font-weight: 700;
   padding: 4px 8px;
@@ -221,7 +221,7 @@ html, body {
 
 .v-kicker {
   display: block;
-  font-family: var(--font-mono);
+  font-family: var(--xt-small);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -265,7 +265,7 @@ html, body {
 }
 
 .plate-fig-label {
-  font-family: var(--font-mono);
+  font-family: var(--xt-small);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.07em;
@@ -325,7 +325,7 @@ html, body {
 
 .dof-state {
   display: block;
-  font-family: var(--font-mono);
+  font-family: var(--xt-small);
   font-size: 0.65rem;
   font-weight: 700;
   margin-top: 2px;
@@ -365,7 +365,7 @@ html, body {
 }
 
 .section-label {
-  font-family: var(--font-mono);
+  font-family: var(--xt-small);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -422,7 +422,7 @@ html, body {
 
 .dt-info { display: flex; flex-direction: column; gap: 1px; }
 .dt-info strong { font-size: 0.77rem; color: var(--text-main); }
-.dt-info span { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); }
+.dt-info span { font-family: var(--xt-small); font-size: 0.68rem; color: var(--text-muted); }
 
 /* Precedence Master Box */
 .envelope-master {
@@ -434,7 +434,7 @@ html, body {
 }
 
 .env-top-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 7px; }
-.env-kicker { display: block; font-family: var(--font-mono); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.08em; color: var(--text-muted); }
+.env-kicker { display: block; font-family: var(--xt-small); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.08em; color: var(--text-muted); }
 .env-callout { font-family: var(--font-mono); font-size: 0.96rem; font-weight: 700; color: var(--text-main); }
 .env-explain { font-size: 0.78rem; line-height: 1.46; color: var(--text-muted); }
 
@@ -478,7 +478,7 @@ html, body {
 .sheet-folio-header {
   display: flex;
   justify-content: space-between;
-  font-family: var(--font-mono);
+  font-family: var(--xt-small);
   font-size: 0.68rem;
   font-weight: 600;
   letter-spacing: 0.07em;
@@ -490,7 +490,7 @@ html, body {
   gap: 8px;
 }
 
-.sheet-subtitle { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px; }
+.sheet-subtitle { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 18px; font-family: var(--xt-sub); }
 
 .validator-box {
   border: 1px solid var(--border);
@@ -514,6 +514,7 @@ html, body {
   font-size: 0.7rem;
   font-weight: 600;
   color: var(--text-muted);
+  font-family: var(--xt-small);
 }
 
 .val-inp {
@@ -557,7 +558,7 @@ html, body {
 .rules-spread { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
 .rule-col { border: 1px solid var(--border); border-top: 3px solid var(--accent-ok); border-radius: 9px; background: var(--bg-panel); padding: 14px 16px; }
 .rule-col.is-warn { border-top-color: var(--accent); }
-.rule-badge { display: inline-block; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 5px; margin-bottom: 10px; }
+.rule-badge { display: inline-block; font-family: var(--xt-small); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; padding: 3px 8px; border-radius: 5px; margin-bottom: 10px; }
 .rule-badge.good { background: var(--ok-bg); color: var(--accent-ok); }
 .rule-badge.warn { background: var(--warn-bg); color: var(--accent); }
 

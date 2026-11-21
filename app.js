@@ -119,7 +119,7 @@
         <div class="dof-chip ${cls}">
           <div class="dof-name">${k}</div>
           <span class="dof-state">${st}</span>
-          <span style="font-size:0.65rem;color:var(--text-dim);">${labels[k]}</span>
+          <span style="font-size:0.65rem;color:var(--text-dim); font-family: var(--xt-small);">${labels[k]}</span>
         </div>
       `;
     }).join('');
