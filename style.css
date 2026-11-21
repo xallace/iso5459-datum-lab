@@ -1,30 +1,31 @@
 /* ==========================================================================
    style.css — 3-2-1 Datum Reference Frame Lab (1967 Book-Plate Aesthetic)
    Shared style language with Straightness Lab, Banana Shaft Lab & BeamLab:
-   Parchment Paper (#efe6d3), Technical Ink (#181715), Vermilion (#d94426)
+   Dark portfolio palette: Page (#090d16), Ink (#e9edf5), Vermilion (#ff7d61)
    ========================================================================== */
 
 :root {
-  --bg-app: #efe6d3;
-  --bg-panel: #f6efe0;
-  --bg-card-solid: #faf5e8;
-  --border: rgba(24, 23, 21, 0.19);
-  --border-soft: rgba(24, 23, 21, 0.11);
-  --border-strong: rgba(217, 68, 38, 0.55);
+  color-scheme: dark;
+  --bg-app: #090d16;
+  --bg-panel: #0f151f;
+  --bg-card-solid: #111722;
+  --border: rgba(233, 237, 245, 0.19);
+  --border-soft: rgba(233, 237, 245, 0.11);
+  --border-strong: rgba(255, 125, 97, 0.55);
 
-  --text-main: #181715;
-  --text-muted: #4b463e;
-  --text-dim: #736b5f;
+  --text-main: #e9edf5;
+  --text-muted: #a8b3c5;
+  --text-dim: #7f8b9f;
 
-  --accent: #d94426;
-  --accent-warm: #b45309;
-  --accent-ok: #047857;
-  --accent-blue: #0369a1;
+  --accent: #ff7d61;
+  --accent-warm: #ed864b;
+  --accent-ok: #58b691;
+  --accent-blue: #56a8e4;
 
-  --ok-bg: rgba(4, 120, 87, 0.09);
-  --warn-bg: rgba(217, 68, 38, 0.10);
-  --amber-bg: rgba(180, 83, 9, 0.10);
-  --blue-bg: rgba(3, 105, 161, 0.09);
+  --ok-bg: rgba(88, 182, 145, 0.09);
+  --warn-bg: rgba(255, 125, 97, 0.10);
+  --amber-bg: rgba(237, 134, 75, 0.10);
+  --blue-bg: rgba(86, 168, 228, 0.09);
 
   --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-display: 'Outfit', 'Inter', sans-serif;
@@ -77,7 +78,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(217, 68, 38, 0.10);
+  background: rgba(255, 125, 97, 0.10);
   border: 1px solid var(--border-strong);
   color: var(--text-main);
   flex-shrink: 0;
@@ -106,7 +107,7 @@ html, body {
   display: flex;
   align-items: center;
   gap: 4px;
-  background: rgba(24, 23, 21, 0.06);
+  background: rgba(233, 237, 245, 0.06);
   padding: 4px;
   border-radius: 10px;
   border: 1px solid var(--border);
@@ -128,8 +129,8 @@ html, body {
   white-space: nowrap;
 }
 
-.tab-btn:hover { color: var(--text-main); background: rgba(24, 23, 21, 0.06); }
-.tab-btn.active { background: var(--accent); color: #faf5e8; }
+.tab-btn:hover { color: var(--text-main); background: rgba(233, 237, 245, 0.06); }
+.tab-btn.active { background: var(--accent); color: #111722; }
 
 .pill-btn {
   display: inline-flex;
@@ -149,8 +150,8 @@ html, body {
 }
 
 .pill-btn:hover { border-color: var(--border-strong); transform: translateY(-1px); }
-.pill-btn.accent { background: rgba(217, 68, 38, 0.12); border-color: rgba(217, 68, 38, 0.45); color: #b8321b; }
-.pill-btn.vermilion { background: var(--accent); border-color: var(--accent); color: #faf5e8; }
+.pill-btn.accent { background: rgba(255, 125, 97, 0.12); border-color: rgba(255, 125, 97, 0.45); color: #fb7158; }
+.pill-btn.vermilion { background: var(--accent); border-color: var(--accent); color: #111722; }
 
 /* Guided Tour */
 .tour-banner {
@@ -171,7 +172,7 @@ html, body {
   padding: 4px 8px;
   border-radius: 6px;
   background: var(--accent);
-  color: #faf5e8;
+  color: #111722;
   white-space: nowrap;
 }
 .tour-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 3px; }
@@ -285,7 +286,7 @@ html, body {
 }
 
 .mini-btn:hover { border-color: var(--border-strong); }
-.mini-btn.vermilion, .mini-btn.active { background: var(--accent); border-color: var(--accent); color: #faf5e8; }
+.mini-btn.vermilion, .mini-btn.active { background: var(--accent); border-color: var(--accent); color: #111722; }
 
 .canvas-3d {
   display: block;
@@ -386,7 +387,7 @@ html, body {
   cursor: pointer;
 }
 .preset-btn:hover { border-color: var(--border-strong); }
-.preset-btn.active { background: var(--accent); border-color: var(--accent); color: #faf5e8; }
+.preset-btn.active { background: var(--accent); border-color: var(--accent); color: #111722; }
 
 /* Datum Engagement Checkboxes */
 .datum-toggle-list { display: flex; flex-direction: column; gap: 8px; }
@@ -412,7 +413,7 @@ html, body {
   font-family: var(--font-mono);
   font-weight: 800;
   font-size: 0.85rem;
-  color: #faf5e8;
+  color: #111722;
   flex-shrink: 0;
 }
 .dt-badge.a { background: var(--accent-ok); }
@@ -441,7 +442,7 @@ html, body {
   border: 1.5px solid var(--accent);
   border-radius: 8px;
   background: var(--accent);
-  color: #faf5e8;
+  color: #111722;
   font-family: var(--font-ui);
   font-size: 0.75rem;
   font-weight: 700;
@@ -549,7 +550,7 @@ html, body {
 }
 
 .val-result.ok { background: var(--ok-bg); border: 1px solid var(--accent-ok); color: var(--accent-ok); }
-.val-result.err { background: var(--warn-bg); border: 1px solid var(--accent); color: #9a2410; }
+.val-result.err { background: var(--warn-bg); border: 1px solid var(--accent); color: #f0745d; }
 
 .sheet-divider { height: 1px; background: var(--border); margin: 20px 0; }
 

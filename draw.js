@@ -9,21 +9,21 @@
   'use strict';
 
   const C = {
-    paper: '#faf5e8',
-    warm: '#f3ebda',
-    grid: '#e8dec9',
-    ink: '#181715',
-    muted: '#5c564c',
-    rule: '#cfc5b2',
-    ruleSoft: '#e4dac5',
-    green: '#047857',
-    greenFill: 'rgba(4, 120, 87, 0.16)',
-    blue: '#0369a1',
-    blueFill: 'rgba(3, 105, 161, 0.16)',
-    amber: '#b45309',
-    amberFill: 'rgba(180, 83, 9, 0.18)',
-    red: '#d94426',
-    redFill: 'rgba(217, 68, 38, 0.14)'
+    paper: '#0a101a',
+    warm: '#0e141e',
+    grid: '#151b26',
+    ink: '#e9edf5',
+    muted: '#95a0b4',
+    rule: '#29303c',
+    ruleSoft: '#181e29',
+    green: '#58b691',
+    greenFill: 'rgba(88, 182, 145, 0.16)',
+    blue: '#56a8e4',
+    blueFill: 'rgba(86, 168, 228, 0.16)',
+    amber: '#ed864b',
+    amberFill: 'rgba(237, 134, 75, 0.18)',
+    red: '#ff7d61',
+    redFill: 'rgba(255, 125, 97, 0.14)'
   };
 
   function setupCanvas(canvas) {
@@ -265,12 +265,12 @@
     });
 
     const faces = [
-      { idx: [0, 1, 2, 3], fill: 'rgba(232, 222, 200, 0.85)', tag: 'A' }, // bottom
-      { idx: [4, 5, 6, 7], fill: 'rgba(250, 245, 232, 0.90)', tag: 'TOP' }, // top
-      { idx: [0, 1, 5, 4], fill: 'rgba(241, 233, 214, 0.88)', tag: 'FRONT' },
-      { idx: [2, 3, 7, 6], fill: state.hasB && state.dofPreset === 'block321' ? 'rgba(3, 105, 161, 0.18)' : 'rgba(230, 220, 198, 0.86)', tag: 'B' },
-      { idx: [3, 0, 4, 7], fill: state.hasC && state.dofPreset === 'block321' ? 'rgba(180, 83, 9, 0.18)' : 'rgba(235, 226, 206, 0.88)', tag: 'C' },
-      { idx: [1, 2, 6, 5], fill: 'rgba(226, 216, 195, 0.86)', tag: 'RIGHT' }
+      { idx: [0, 1, 2, 3], fill: 'rgba(21, 27, 38, 0.85)', tag: 'A' }, // bottom
+      { idx: [4, 5, 6, 7], fill: 'rgba(10, 16, 26, 0.90)', tag: 'TOP' }, // top
+      { idx: [0, 1, 5, 4], fill: 'rgba(15, 21, 31, 0.88)', tag: 'FRONT' },
+      { idx: [2, 3, 7, 6], fill: state.hasB && state.dofPreset === 'block321' ? 'rgba(86, 168, 228, 0.18)' : 'rgba(23, 29, 40, 0.86)', tag: 'B' },
+      { idx: [3, 0, 4, 7], fill: state.hasC && state.dofPreset === 'block321' ? 'rgba(237, 134, 75, 0.18)' : 'rgba(19, 24, 35, 0.88)', tag: 'C' },
+      { idx: [1, 2, 6, 5], fill: 'rgba(26, 32, 43, 0.86)', tag: 'RIGHT' }
     ];
 
     faces.forEach(f => {
@@ -308,7 +308,7 @@
     ctx.beginPath();
     borePts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
     ctx.closePath();
-    ctx.fillStyle = state.dofPreset === 'flange' && state.hasB ? C.blueFill : 'rgba(24, 23, 21, 0.09)';
+    ctx.fillStyle = state.dofPreset === 'flange' && state.hasB ? C.blueFill : 'rgba(233, 237, 245, 0.09)';
     ctx.fill();
     ctx.strokeStyle = state.dofPreset === 'flange' && state.hasB ? C.blue : C.ink;
     ctx.lineWidth = 1.5;
@@ -423,7 +423,7 @@
     ctx.beginPath();
     vCorners.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
     ctx.closePath();
-    ctx.fillStyle = 'rgba(239, 230, 211, 0.82)';
+    ctx.fillStyle = 'rgba(16, 22, 32, 0.82)';
     ctx.fill();
     ctx.strokeStyle = C.ink;
     ctx.lineWidth = 1.9;
@@ -622,7 +622,7 @@
 
     // Nominal shaft centerline
     ctx.save();
-    ctx.strokeStyle = 'rgba(24, 23, 21, 0.25)';
+    ctx.strokeStyle = 'rgba(233, 237, 245, 0.25)';
     ctx.lineWidth = 0.9;
     ctx.setLineDash([12, 4, 2, 4]);
     ctx.beginPath();
@@ -662,7 +662,7 @@
 
     // Key Functional Journals
     drawSeg(10, 40, 32, 0, C.greenFill, 'DATUM A', '30 mm Seat');
-    drawSeg(98, 142, 48, cdSol.gearOffsetUm, 'rgba(239,230,211,0.9)', 'GEAR', 'x = 120 mm');
+    drawSeg(98, 142, 48, cdSol.gearOffsetUm, 'rgba(16, 22, 32,0.9)', 'GEAR', 'x = 120 mm');
     drawSeg(200, 230, 32, cdSol.seatBOffsetUm, C.blueFill, 'DATUM B', 'Span 190 mm');
     drawSeg(245, 275, 28, cdSol.overhangOffsetUm, C.redFill, 'PINION', 'x = 260 mm');
 
@@ -745,7 +745,7 @@
       ctx.lineTo(x, bump);
     }
     ctx.closePath();
-    ctx.fillStyle = 'rgba(232, 222, 200, 0.9)';
+    ctx.fillStyle = 'rgba(21, 27, 38, 0.9)';
     ctx.fill();
     ctx.strokeStyle = C.ink;
     ctx.lineWidth = 1.9;
